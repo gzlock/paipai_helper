@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>日志记录</title>
+    <style>
+        /* 仿操作系统 terminal 风格 */
+        :root {
+            --bg: #0b0f14;
+            /* 深色背景 */
+            --panel: #071018;
+            /* 稍微不同的面板色，用于区分 */
+            --text: #cfe8ff;
+            /* 主文本色，偏冷蓝 */
+            --muted: #7f93a6;
+            /* 次要文本 */
+            --accent: #66d9ef;
+            /* 链接/高亮色 */
+            --error: #ff6b6b;
+            /* 错误/警告 */
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 18px;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(180deg, var(--bg), #061018 80%);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            box-sizing: border-box;
+        }
+
+        /* 顶部控制条 */
+        body>div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        h3 {
+            margin: 0;
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        button#clear-logs-btn {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid rgba(102, 217, 239, 0.18);
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .12s ease;
+            font-size: 13px;
+        }
+
+        button#clear-logs-btn:hover {
+            background: rgba(102, 217, 239, 0.06);
+            transform: translateY(-1px)
+        }
+
+        /* 日志列表整体 */
+        #log-list {
+            list-style: none;
+            margin: 0;
+            padding: 12px;
+            height: calc(100vh - 140px);
+            /* 在常见窗口下留出顶部与边距 */
+            background: var(--panel);
+            border-radius: 8px;
+            overflow: auto;
+            box-shadow: 0 6px 18px rgba(2, 6, 10, 0.6) inset;
+            /* display: flex;
+            flex-direction: column;
+            gap: 8px; */
+            scrollbar-width: thin;
+        }
+
+        /* 将最新日志显示在底部：在 JS 中添加或 appendChild 时会自然在底部显示 */
+        /* 同时保证当有新日志时自动滚动到底部（log.js 亦可触发 scrollIntoView） */
+
+        #log-list li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 8px 10px;
+            border-radius: 6px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        #log-list .time {
+            flex: 0 0 200px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        #log-list .content {
+            flex: 1 1 auto;
+            font-size: 13px;
+            color: var(--text);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            overflow: hidden;
+            min-width: 0;
+            /* 允许子项使用 text-overflow */
+        }
+
+        /* 超链接样式：可点击、最大宽度 100px，超出省略，显示 title tooltip */
+        #log-list .content a {
+            color: var(--accent);
+            text-decoration: underline;
+            display: inline-block;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* 高亮最近一条（视觉提示） */
+        #log-list li.new {
+            background-color: rgba(102, 217, 239, 0.12);
+            animation: fadeOutBg 2s forwards;
+        }
+
+        /* 定义动画 */
+        @keyframes fadeOutBg {
+            from {
+                background-color: rgba(102, 217, 239, 0.12);
+            }
+
+            to {
+                background-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h3>只记录最新的500条日志，当前数量：<span id="count"></span></h3>
+        <button id="clear-logs-btn">清空日志</button>
+    </div>
+    <!-- log-list 仿照操作系统的terminal,最新内容会显示在列表最后,然后滚动高度要保持显示最新记录 -->
+    <!-- log-list 整体色调也参考操作系统的terminal -->
+    <ul id="log-list" last-time="0">
+        <!-- 日志内容会有超链接,确保可以点击,并且超链接max-width为100px,超链接内超出的文本用text-overflow: ellipsis省略 -->
+        <!-- <li>
+            <span class="time">2025年9月27日 04:40:12</span>
+            <span class="content">日志内容<a href="https://163.com">链接链接链接链接链接链接链接链接链接链接链接链接链接链接</a></span>
+        </li> -->
+    </ul>
+</body>
+
+<script type="module" src="./logs.js"></script>
+
+</html>

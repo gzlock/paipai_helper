@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>任务执行状态面板</title>
+    <style>
+        body {
+            background: #f6f8fa;
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .tasks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .tasks>div {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+            padding: 24px 20px 16px 20px;
+            min-width: 260px;
+            max-width: 320px;
+            flex: 1 1 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: box-shadow 0.2s;
+        }
+
+        .tasks>div:hover {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+        }
+
+        .tasks>div>div {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .tasks span:first-child {
+            color: #888;
+        }
+
+        .tasks span:last-child {
+            flex: 1;
+            min-width: 0;
+            text-align: right;
+        }
+
+        .tasks a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: 500;
+
+            display: inline-block;
+            /* 或 block，不能是纯 inline */
+            max-width: 100%;
+            /* 限制最大宽度 */
+            white-space: nowrap;
+            /* 不换行 */
+            overflow: hidden;
+            /* 超出隐藏 */
+            text-overflow: ellipsis;
+            /* 显示省略号 */
+        }
+
+        .tasks a:hover {
+            text-decoration: underline;
+        }
+
+        .actions {
+            margin-top: 10px;
+            gap: 10px !important;
+        }
+
+        .actions button {
+            background: #f0f4fa;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 16px;
+            margin-left: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s;
+        }
+
+        .actions .pause-btn {
+            background: #ffe0b2;
+            color: #b26a00;
+        }
+
+        .actions .continue-btn {
+            background: #c8e6c9;
+            color: #256029;
+        }
+
+        .actions .delete-btn {
+            background: #ffcdd2;
+            color: #b71c1c;
+        }
+
+        .actions button:hover {
+            filter: brightness(0.95);
+        }
+
+        #task-filters {
+            margin: 8px 0 0 0;
+            display: inline-flex;
+            gap: 16px;
+        }
+
+        #task-filters>span {
+            border-radius: 10px;
+            padding: 4px 12px;
+            background-color: #ccc;
+        }
+
+        .filters>label {
+            font-weight: 600;
+        }
+
+        label {
+            font-weight: 500;
+            color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="filters">
+            <label>筛选任务状态</label>
+            <span id="task-filters">
+                <span>所有<input type="checkbox" id="all" checked value="-1"></span>
+            </span>
+        </div>
+        <div class="tasks">
+            <!-- 子元素以卡片样式存在 -->
+        </div>
+    </div>
+
+    <script type="module" src="./dash.js"></script>
+
+</body>
+
+</html>

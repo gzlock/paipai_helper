@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>全局设置</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto', '微软雅黑', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+        }
+
+        body {
+            margin: 30px auto;
+            padding: 30px;
+            max-width: 1000px;
+            border: 1px solid #d1d5db;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+            background: #fff;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #374151;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 18px;
+            display: inline;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 15px;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .horizontal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .horizontal>* {
+            flex: 1;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
+            border: 1px solid #c7d2fe;
+        }
+
+        .list {
+            margin-top: 12px;
+            min-height: 40px;
+            overflow-y: auto;
+            max-height: 500px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .list>span {
+            border-radius: 8px;
+            background-color: #c6deff;
+            margin: 0 4px 0 0;
+            vertical-align: middle;
+            outline: none;
+        }
+
+        .list>span:hover {
+            background-color: #93c5fd;
+        }
+
+        .list>span>a {
+            padding: 6px 12px;
+            color: #2563eb;
+            padding: 6px 12px;
+            font-weight: 500;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.2s;
+            box-shadow: 0 1px 4px rgba(60, 60, 120, 0.06);
+        }
+
+        .add_btn {
+            background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 12px;
+            box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
+            transition: background 0.2s;
+        }
+
+        .add_btn:hover {
+            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
+        }
+
+        .list .delete-btn {
+            background: linear-gradient(90deg, #ef4444 0%, #fca5a5 100%);
+            color: #fff;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            padding: 6px 12px;
+            font-weight: 500;
+            font-size: 14px;
+            margin-left: 0px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            vertical-align: middle;
+            outline: none;
+        }
+
+        .list .delete-btn:hover {
+            background: linear-gradient(90deg, #dc2626 0%, #f87171 100%);
+        }
+
+        .tips {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 18px;
+        }
+
+        img {
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(60, 60, 120, 0.10);
+            margin-top: 8px;
+        }
+    </style>
+    <link rel="stylesheet" href="/global.css">
+</head>
+
+<body>
+    <h1>全局设置，会影响所有任务 </h1>
+    <div class="links">
+        <a href="/dash/index.html">任务列表</a>
+        <a href="/logs/index.html">日志记录</a>
+    </div>
+    <div class="horizontal">
+        <div>
+            <div>
+                <h2>发派派币时跳过以下用户ID</h2>
+                <button id="add_money_uid" class="add_btn" title="添加ID">+</button>
+            </div>
+            <div id="skip_money_list" class="list">
+            </div>
+        </div>
+        <div>
+            <div>
+                <h2>发威望时跳过以下用户ID</h2>
+                <button id="add_rvrc_uid" class="add_btn" title="添加ID">+</button>
+            </div>
+            <div id="skip_rvrc_list" class="list">
+            </div>
+        </div>
+        <div>
+            <div>
+                <h2>发鲜花时跳过以下用户ID</h2>
+                <button id="add_flower_uid" class="add_btn" title="添加ID">+</button>
+            </div>
+            <div id="skip_flower_list" class="list">
+            </div>
+        </div>
+    </div>
+    <div class="tips">*任何改动都会自动保存</div>
+    <div class="tips">
+        <h3>用户ID是一串数字</h3>
+        <img src="../what_is_uid.png" height="200" />
+    </div>
+    <button id="debug-btn" style="display: none;">测试按钮</button>
+    <script type="module" src="options.js"></script>
+</body>
+
+</html>

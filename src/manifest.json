@@ -1,0 +1,29 @@
+{
+    "manifest_version": 3,
+    "name": "派派小说论坛批量评分助手",
+    "version": "0.0.6",
+    "description": "由gzlock制作",
+    "action": {
+        "default_title": "派派小说评分助手"
+    },
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "permissions": [
+        "tabs",
+        "scripting",
+        "activeTab",
+        "storage",
+        "sidePanel",
+        "alarms"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "options_ui": {
+        "page": "options/index.html",
+        "open_in_tab": true
+    }
+}
